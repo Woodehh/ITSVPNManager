@@ -9,7 +9,7 @@
 #import "ITSVPNManager.h"
 
 
-#define kVpnKeychain @"com.umbravpn.iosclient.keychain.library"
+#define kVpnKeychain @"com.vpnservice.keychain"
 
 
 @implementation ITSVPNManager
@@ -100,18 +100,12 @@
     }];
 }
 
--(NEVPNManager*)getManager {
-    return _vpnmanager;
-}
-
 -(void)startVpnTunnel {
     [_vpnmanager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
         NSError *startError;
         [_vpnmanager.connection startVPNTunnelAndReturnError:&startError];
         if(startError) {
             NSLog(@"Start error: %@", startError.localizedDescription);
-        } else {
-            NSLog(@"Zou goed motten gaan");
         }
     }];
 }
